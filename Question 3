@@ -1,0 +1,49 @@
+
+package LinkedList;
+
+class Node3 {
+    int val;
+    Node3 next;
+
+    Node3(int val) {
+        this.val = val;
+    }
+}
+
+public class PositionInLL{
+
+    static Node3 createUsingRecursion(int start, int end) {
+
+        if (start > end) {
+            return null;
+        }
+
+        Node3 head = new Node3(start);
+
+        head.next = createUsingRecursion(start + 1, end);
+
+        return head;
+    }
+
+    static int findPosition(Node3 head, int target, int pos) {
+
+        if (head == null) {
+            return -1;
+        }
+
+        if (head.val == target) {
+            return pos;
+        }
+
+        return findPosition(head.next, target, pos + 1);
+    }
+
+    public static void main(String[] args) {
+
+        Node3 head = createUsingRecursion(1, 10);
+
+        int ans = findPosition(head, 8, 1);
+
+        System.out.println(ans);
+    }
+}
